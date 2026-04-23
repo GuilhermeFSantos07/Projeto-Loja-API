@@ -47,7 +47,7 @@ export const atualizarProdutos = async (req, res) => {
     }
 };
 
-export const deletarProduto = async (res, req) => {
+export const deletarProduto = async (req, res) => {
     try{
         const {id} = req.params;
 
