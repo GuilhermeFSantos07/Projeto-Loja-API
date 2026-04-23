@@ -25,7 +25,7 @@ export const criarProduto = async (req, res) => {
 
 export const listarProdutos = async (req, res) => {
     try{
-        const produtos = await Product.find().populate('criadoPor', nome);
+        const produtos = await Product.find().populate('criadoPor', 'nome');
         res.status(200).json(produtos);
     }catch(error){
         res.status(500).json({message: "Erro ao buscar produtos", erro: error.message});
