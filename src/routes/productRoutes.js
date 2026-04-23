@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { criarProduto } from "../controllers/ProductController";
-import { authMiddleware } from "../middlewares/authMiddleware";
+import { criarProduto } from "../controllers/ProductController.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 router.post('/', authMiddleware, criarProduto);
