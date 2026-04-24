@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 
 const UserSchema = new mongoose.Schema ({
     nome: {type: String, require: true},
-    username: {type: String, require: true, unique: true},
+    username: {type: String, required: true, unique: true},
     senha: {type: String, require: true},
     cargo: {
         type: String,
@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema ({
 }, {timestamps: true});
 
 UserSchema.pre('save', async function (){
-    if (!this.isModified('senha')) return next();
+    if (!this.isModified('senha')) return;
     this.senha = await bcrypt.hash(this.senha, 10);
 });
 
