@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const UserSchema = new mongoose.Schema ({
-    nome: {type: String, require: true},
+    nome: {type: String, required: true},
     username: {type: String, required: true, unique: true},
-    senha: {type: String, require: true},
+    senha: {type: String, required: true},
     cargo: {
         type: String,
         enum: ['dev', 'gerente', 'vendedor'],
