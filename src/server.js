@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
+import saleRoutes from './routes/saleRoutes.js';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/produtos', productRoutes);
+app.use('/api/vendas', saleRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("Conectado ao MongoBD com sucesso"))
