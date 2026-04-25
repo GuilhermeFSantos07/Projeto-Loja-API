@@ -24,3 +24,12 @@ export const registrarVenda = async (req, res) => {
         res.status(500).json({message: "Erro ao registrar venda", erro: error.message});
     }
 };
+
+export const listarVendas = async (req, res) => {
+    try{
+        const vendas = await Sale.find().populate('vendedor', 'nome').sort({data: -1});
+        res.status(200).json(vendas);
+    }catch(error){
+        res.status(500).json({message: "Erro ao buscar vendas", erro: error.message});
+    }
+};
