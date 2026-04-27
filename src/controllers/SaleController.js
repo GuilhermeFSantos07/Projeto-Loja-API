@@ -9,13 +9,13 @@ export const registrarVenda = async (req, res) => {
             valorTotal,
             metodoPagamento,
             desconto,
-            vendedor: req.user.id,
+            vendedor: req.user.id || req.user._id,
             itens
         });
         await novaVenda.save();
 
         for (let item of itens){
-            await Product.findByIdAndUpdate(item.produto.Id, {
+            await Product.findByIdAndUpdate(item.produtoId, {
                 $inc : {quantidade: -item.quantidadeVendida}
             });
         }
