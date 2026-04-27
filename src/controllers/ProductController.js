@@ -2,12 +2,13 @@ import Product from "../models/Product.js";
 
 export const criarProduto = async (req, res) => {
     try{
-        const {nome, preco, quantidade, categoria} = req.body;
+        const {nome, preco, quantidade, categoria, tipo} = req.body;
 
         const novoProduto = new Product ({
             nome,
             preco,
             quantidade,
+            tipo,
             categoria,
             criadoPor: req.user.id
         });
@@ -37,7 +38,7 @@ export const atualizarProdutos = async (req, res) => {
         const {id} = req.params;
         const dadosAtualizados = req.body;
 
-        const produto = await Product.findByIdAndUpdate(id, dadosAtualizados, {new: true});
+        const produto = await Product.findByIdAndUpdate(id, dadosAtualizados, {returnDocument: 'after'});
 
         if(!produto) return res.status(404).json({message: "Produto não encontrado"});
 
