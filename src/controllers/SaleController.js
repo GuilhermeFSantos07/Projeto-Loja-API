@@ -15,9 +15,13 @@ export const registrarVenda = async (req, res) => {
         await novaVenda.save();
 
         for (let item of itens){
-            await Product.findByIdAndUpdate(item.produtoId, {
-                $inc : {quantidade: -item.quantidadeVendida}
-            });
+            const produtoNoBanco = await Product.findById(item.produtoId);
+
+            if(produtoNoBanco && produtoNoBanco.tipo !== 'servico'){
+                await Product.findByIdAndUpdate(item.produtoId, {
+                    $inc : {quantidade: -item.quantidadeVendida}
+                })
+            }
         }
         res.status(201).json({message: "Venda registrada e estoque atualizado", venda: novaVenda});
     }catch(error){
